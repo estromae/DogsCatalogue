@@ -20,5 +20,5 @@ url = Url com informações sobre o cachorro(wikipedia)
 img = Url de imagem da raça do cachorro
 
 # Banco de dados
-o Para o banco de dados, foi utilizado o SQLite, o qual funciona localmente no dispositivo.
+Para o banco de dados, foi utilizado o SQLite, o qual funciona localmente no dispositivo.
 Informações sobre o SQLite: https://docs.expo.dev/versions/latest/sdk/sqlite/
