@@ -15,9 +15,9 @@
 <p>Link: <a href="https://rapidapi.com/myapos--FqlEzvrlv/api/dog-breeds2/">API</a></p>
 
 # Dicionario api
-<p>id = id do registro de cachorro na api</p>
+<p>id = Identificação do registro na api</p>
 <p>breed = Raça</p>
-<p>origin = País de rigem da raça</p>
+<p>origin = País de origem da raça</p>
 <p>url = Url com informações sobre o cachorro(wikipedia)</p>
 <p>img = Url de imagem da raça do cachorro</p>
 
