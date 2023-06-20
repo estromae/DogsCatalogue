@@ -14,7 +14,7 @@ export default function Home({navigation}) {
         // dropTable("dog")
         userCreateTable()
         dogCreateTable()
-        navigation.navigate('CatalogueScreen', {level: 2})
+        navigation.navigate('CatalogueScreen', {level: 1})
     }, [])
 
     function handleInputs(email, password) {

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View, TextInput, Alert, Image, TouchableOpacity } from "react-native";
 
 import { dogUpdate } from "../../services/dogs/dogsServices";
 
 export default function Edit({route}) {
-    const [id, setId] = useState(route.params.item.id)
+    const [id] = useState(route.params.item.id)
     const [breed, setBreed] = useState(route.params.item.breed)
     const [origin, setOrigin] = useState(route.params.item.origin)
     const [infoUrl, setInfoUrl] = useState(route.params.item.infoUrl)

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Button, TextInput, Alert, FlatList, Image, TouchableOpacity, Linking } from "react-native";
+import { StyleSheet, Text, View, Alert, FlatList, Image, TouchableOpacity, Linking } from "react-native";
 import { SearchBar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/AntDesign'
 
@@ -15,9 +15,14 @@ export default function Find() {
     }, [])
 
     async function getDogsFromApi() {
-        const dogs = await getDataApi()
-        const result = await dogs.json()
-        setDogsApi(result)
+        try {
+            const dogs = await getDataApi()
+            const result = await dogs.json()
+            setDogsApi(result)
+        } catch (ex) {
+            console.error("Error: " + ex)
+            Alert.alert("Attention", "Error in data")
+        }   
     }
 
     function filter(input) {

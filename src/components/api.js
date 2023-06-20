@@ -1,6 +1,4 @@
-import { StyleSheet, Text, View, Button } from 'react-native';
 
-const dogName = 'golden retriever'
 const url = 'https://dog-breeds2.p.rapidapi.com/dog_breeds';
 const options = {
     method: 'GET',
@@ -13,11 +11,10 @@ const options = {
 async function getDataApi() {
     try {
         const response = await fetch(url, options);
-        // const result = await response.text();
-        console.log(response);
+        console.log(response.status);
         return response
-    } catch (error) {
-        console.error(error);
+    } catch (ex) {
+        console.log("Error: " + ex);
     }
 }
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Button, TextInput, Alert, FlatList, TouchableOpacity, Image, Linking } from "react-native";
+import { StyleSheet, Text, View, Alert, FlatList, TouchableOpacity, Image, Linking } from "react-native";
 import Icon from 'react-native-vector-icons/AntDesign'
 
 import { dogsList, dogRemove } from "../../services/dogs/dogsServices";
