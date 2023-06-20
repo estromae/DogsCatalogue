@@ -1,24 +1,26 @@
 # DogsCatalogue
-O projeto é um catalogo de cachorros, os quais podem ser adicionados ao banco de dados local do usuário por meio do login sendo administrador.
-Para logar como admin:
-  email: admin@admin.com
-  senha: admin
-Para logar como usuario comum:
-  email: comum@comum.com
-  senha: comum
-O admin pode adicionar e remover registros do banco de dados enquanto o usuário comum pode editar os registros já adicionados pelo administrador
+<p>O projeto é um catalogo de cachorros, os quais podem ser adicionados ao banco de dados local do usuário por meio do login sendo administrador.</p>
+
+**Para logar como admin:**
+<p>email: admin@admin.com</p>
+<p>senha: admin</p>
+
+**Para logar como usuario comum:**
+<p>email: comum@comum.com</p>
+<p>senha: comum</p>
+<p>O admin pode adicionar e remover registros do banco de dados enquanto o usuário comum pode editar os registros já adicionados pelo administrador</p>
 
 # Api
-Foi utilizada a api dog-breeds2
-Link da api: https://rapidapi.com/myapos--FqlEzvrlv/api/dog-breeds2/
+<p>Foi utilizada a api dog-breeds2</p>
+<p>Link: <a href="https://rapidapi.com/myapos--FqlEzvrlv/api/dog-breeds2/">API</a></p>
 
 # Dicionario api
-id = id do registro de cachorro na api
-breed = Raça
-origin = País de rigem da raça
-url = Url com informações sobre o cachorro(wikipedia)
-img = Url de imagem da raça do cachorro
+<p>id = id do registro de cachorro na api</p>
+<p>breed = Raça</p>
+<p>origin = País de rigem da raça</p>
+<p>url = Url com informações sobre o cachorro(wikipedia)</p>
+<p>img = Url de imagem da raça do cachorro</p>
 
 # Banco de dados
-Para o banco de dados, foi utilizado o SQLite, o qual funciona localmente no dispositivo.
-Informações sobre o SQLite: https://docs.expo.dev/versions/latest/sdk/sqlite/
+<p>Para o banco de dados, foi utilizado o SQLite, o qual funciona localmente no dispositivo.</p>
+<p>Informações sobre o <a href="https://docs.expo.dev/versions/latest/sdk/sqlite/">SQLite</a></p>
