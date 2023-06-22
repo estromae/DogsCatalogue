@@ -29,30 +29,12 @@ async function dogsList() {
     })
 }
 
-// {"id":1,"breed":"Akbash","origin":"Turkey","url":"https://en.wikipedia.org/wiki/Akbash","img":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Akba%C5%9F_cinsi_k%C3%B6pek.jpg/220px-Akba%C5%9F_cinsi_k%C3%B6pek.jpg",
-// "meta":{"height":{"dogs":"60-85 cm (24-33 in): 7","bitches":"50-75 cm (20-30 in): 7"},
-//     "weight":{"dogs":"45-65 kg (99-143 lb): 7","bitches":"35-55 kg (77-121 lb): 7"},
-//     "coat":"double coat: 90","img_src_set":{"1.5x":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Akba%C5%9F_cinsi_k%C3%B6pek.jpg/330px-Akba%C5%9F_cinsi_k%C3%B6pek.jpg","2x":"https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Akba%C5%9F_cinsi_k%C3%B6pek.jpg/440px-Akba%C5%9F_cinsi_k%C3%B6pek.jpg"},"life_span":"Not available",
-//     "other_names":"Akbaş Çoban Köpeği",
-//     "common_nicknames":"Not available",
-//     "colour":"white: 90",
-//     "litter_size":"Not available",
-//     "notes":"recognised by the Ministry of Agriculture and Rural Affairs of Turkey",
-//     "breed_status":"Not available",
-//     "foundation_stock":"Not available"}},
-
-
 //////////// User ////////////
 async function dogUpdate(dog) {
-    console.log("Em services id: " + dog.id)
-    console.log("Em services: " + dog.breed)
-    console.log("Em services : " + dog.origin)
-    console.log("Em services : " + dog.url)
-    console.log("Em services : " + dog.img)
     return new Promise((resolve, reject) => {
         try {
             db.transaction(tx => { 
-                tx.executeSql("UPDATE dog SET breed=?, origin=?, infoUrl=?, imgUrl=? WHERE id = ?", 
+                tx.executeSql(dogSqlUpdate, 
                     [dog.breed, dog.origin, dog.url, dog.img, dog.id],
                     (transaction, resultSet) => {
                         console.log(resultSet)
@@ -74,11 +56,6 @@ async function dogUpdate(dog) {
 
 //////////// Admin ////////////
 async function dogCreate(dog) {
-    console.log("Em services id: " + dog.id)
-    console.log("Em services " + dog.breed)
-    console.log("Em services : " + dog.origin)
-    console.log("Em services : " + dog.url)
-    console.log("Em services : " + dog.img)
     return new Promise((resolve, reject) => {
         console.log("Adicionar registro na tabela...")
         try {
