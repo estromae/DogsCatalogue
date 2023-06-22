@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TextInput, Alert, Image, TouchableOpacity } fro
 
 import { dogUpdate } from "../../services/dogs/dogsServices";
 
-export default function Edit({route}) {
+export default function Edit({navigation, route}) {
     const [id] = useState(route.params.item.id)
     const [breed, setBreed] = useState(route.params.item.breed)
     const [origin, setOrigin] = useState(route.params.item.origin)
@@ -19,6 +19,8 @@ export default function Edit({route}) {
         try {
             await dogUpdate(item)
             alert("Success in editing item")
+            const wasUpdate = true
+            navigation.navigate("CatalogueScreen", {wasUpdate: wasUpdate})
         } catch (ex) {
             alert("Error in editing item")
             console.log(ex)
