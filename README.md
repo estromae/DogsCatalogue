@@ -24,3 +24,8 @@
 # Banco de dados
 <p>Para o banco de dados, foi utilizado o SQLite, o qual funciona localmente no dispositivo.</p>
 <p>Informações sobre o <a href="https://docs.expo.dev/versions/latest/sdk/sqlite/">SQLite</a></p>
+
+# Anotações
+<p>Depois de um cachorro ser adicionado, a página de catalogo deve ser atualizada usando o botão refresh</P>
+<p>Ao clicar na imagem de um cachorro nas listas, será aberto o navegador configurado do dispositivo no link de informações do cachorro</p>
+<p>A pesquisa nas listas é feita pela raça do cachorro</p>
