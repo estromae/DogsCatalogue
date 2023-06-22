@@ -13,12 +13,6 @@ export default function Catalogue({navigation, route}) {
 
     async function getDogs() {
         const result = await dogsList()
-        console.log(result)
-        console.log(result._array)
-        console.log(result._array[0].imgUrl)
-        console.log(result._array[0].breed)
-        console.log(result._array[0].origin)
-        console.log(result._array[0].infoUrl)
         setDogs(result._array)
     }
 

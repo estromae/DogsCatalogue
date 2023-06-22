@@ -26,21 +26,16 @@ export default function Find() {
     }
 
     function filter(input) {
-        console.log(input)
         setSearch(input)
-
         const resultFilter = dogsApi.filter((item) => {
             const breed = item.breed.toLowerCase()
             const searchText = input.toLowerCase()
             return breed.includes(searchText)
         })
-        console.log(resultFilter)
-
         setDogsApi(resultFilter)
     }
 
     function addDog(dog) {
-        console.log("Adicionar id: " + dog.id)
         dogCreate(dog)
     }
 
