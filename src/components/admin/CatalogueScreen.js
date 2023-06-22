@@ -1,19 +1,42 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Alert, FlatList, TouchableOpacity, Image, Linking } from "react-native";
+import { SearchBar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/AntDesign'
 
 import { dogsList, dogRemove } from "../../services/dogs/dogsServices";
 
 export default function Catalogue({navigation, route}) {
     const [dogs, setDogs] = useState([])
+    const [search, setSearch] = useState('');
     
-    useEffect( () => {
+    useEffect(() => {
         getDogs()
-    }, [])
+        needUpdate()
+    }, [needUpdate()])
+
+    function needUpdate() {
+        if (route.params.wasUpdate) {
+            getDogs()
+            route.params.wasUpdate = false
+        }
+    }
 
     async function getDogs() {
         const result = await dogsList()
         setDogs(result._array)
+    }
+
+    function filter(input) {
+        if (input == '') {
+            getDogs()
+        }
+        setSearch(input)
+        const resultFilter = dogs.filter((item) => {
+            const breed = item.breed.toLowerCase()
+            const searchText = input.toLowerCase()
+            return breed.includes(searchText)
+        })
+        setDogs(resultFilter)
     }
 
     function deleteDog(id) {
@@ -34,6 +57,16 @@ export default function Catalogue({navigation, route}) {
     return (
         <View style={styles.container}>
             <View style={styles.features}>
+                <SearchBar 
+                    containerStyle={styles.containerInputSearchFeature}
+                    inputContainerStyle={styles.inputSearchFeature}
+                    lightTheme={true}
+                    round={true}
+                    placeholder="Search for breed..."
+                    onChangeText={filter}
+                    value={search}
+                    onClear={getDogs}
+                />
                 <Icon style={styles.iconFeatures} name="reload1" size={25} color={'#000'} onPress={() => getDogs()}/>
                 { route.params.level == 1 ?
                     (<Icon style={styles.iconFeatures} name="plus" size={25} color={'#000'} onPress={() => navigation.navigate("FindScreen")}/>)
@@ -82,6 +115,12 @@ const styles = StyleSheet.create({
         height: '5%',
         width: '90%',
         // backgroundColor: 'blue',
+    },
+
+    containerInputSearchFeature: {
+        flex: 1,
+        backgroundColor: 'transparent',
+        opacity: 0.3,
     },
 
     iconFeatures: {

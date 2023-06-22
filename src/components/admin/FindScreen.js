@@ -26,6 +26,9 @@ export default function Find() {
     }
 
     function filter(input) {
+        if (input == '') {
+            getDogsFromApi()
+        }
         setSearch(input)
         const resultFilter = dogsApi.filter((item) => {
             const breed = item.breed.toLowerCase()
@@ -36,7 +39,12 @@ export default function Find() {
     }
 
     function addDog(dog) {
-        dogCreate(dog)
+        try {
+            dogCreate(dog)
+            alert("Success in add item")
+        } catch (error) {
+            alert("Error in add item")
+        }
     }
 
     async function openUrl(url) {
@@ -46,6 +54,10 @@ export default function Find() {
         } else {
             Alert.alert("Attention", "Can`t open this link")
         }
+    }
+    
+    function alert(message) {
+        Alert.alert("Notice", message)
     }
 
     return (
