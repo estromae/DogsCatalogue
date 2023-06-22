@@ -9,6 +9,7 @@ import db from "./SqLiteDatabase"
 
 const userSqlCreateTable = "CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, email TEXT, level INTEGER, password TEXT);"
 const dogSqlCreateTable = "CREATE TABLE IF NOT EXISTS dog (id INTEGER PRIMARY KEY AUTOINCREMENT, breed TEXT, origin TEXT, infoUrl TEXT, imgUrl TEXT);"
+const userSqlCreate = "INSERT INTO user (name, email, level, password) values (?, ?, ?, ?);"
 
 function dropTable(tableName) {
     return new Promise((resolve, reject) => {
@@ -90,7 +91,7 @@ function userCreate(name, email, level, pass) {
         try {
             db.transaction( tx => {
                 tx.executeSql(
-                    "INSERT INTO user (name, email, level, password) values (?, ?, ?, ?);", 
+                    userSqlCreate, 
                     [name, email, level, pass],
                     (transactionCurrent, resultSet) => {
                         resolve()
