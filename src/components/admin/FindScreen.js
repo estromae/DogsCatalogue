@@ -6,9 +6,10 @@ import Icon from 'react-native-vector-icons/AntDesign'
 import { getDataApi } from "../api";
 import { dogCreate } from "../../services/dogs/dogsServices";
 
-export default function Find() {
+export default function Find({route}) {
     const [dogsApi, setDogsApi] = useState([])
-    const [search, setSearch] = useState('');
+    const [search, setSearch] = useState('')
+    const [dogsId] = useState(route.params.dogsId)
 
     useEffect(() => {
         getDogsFromApi()
@@ -40,11 +41,13 @@ export default function Find() {
 
     function addDog(dog) {
         try {
+            dogsId.push(dog.id)
             dogCreate(dog)
             alert("Success in add item")
         } catch (error) {
             alert("Error in add item")
         }
+        console.log(dogsId)
     }
 
     async function openUrl(url) {
@@ -65,7 +68,6 @@ export default function Find() {
             <View style={styles.features}>
                 <SearchBar 
                     containerStyle={styles.containerInputSearchFeature}
-                    inputContainerStyle={styles.inputSearchFeature}
                     lightTheme={true}
                     round={true}
                     placeholder="Search for breed..."
@@ -84,7 +86,13 @@ export default function Find() {
                             </TouchableOpacity>
                             <Text style={[styles.item, styles.textItem]}>{item.breed}</Text>
                             <Text style={[styles.item, styles.textItem]}>{item.origin}</Text>
-                            <Icon style={[styles.icon]} name="plus" size={25} color={'#000'} onPress={() => addDog(item)}/>
+                            { dogsId.includes(item.id) ? 
+                                <Icon style={[styles.icon]} name="check" size={25} color={'#008000'}/>
+                                :
+                                <TouchableOpacity onPress={() => addDog(item)}>
+                                    <Icon style={[styles.icon]} name="plus" size={25} color={'#000'}/>
+                                </TouchableOpacity>
+                            }
                         </View>
                     }
                 />
@@ -116,10 +124,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'transparent',
         opacity: 0.3,
-    },
-
-    inputSearchFeature: {
-        // backgroundColor: 'red',
     },
 
     iconFeatures: {

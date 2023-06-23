@@ -8,6 +8,7 @@ import { dogsList, dogRemove } from "../../services/dogs/dogsServices";
 export default function Catalogue({navigation, route}) {
     const [dogs, setDogs] = useState([])
     const [search, setSearch] = useState('');
+    const [dogsId, setDogsId] = useState([])
     
     useEffect(() => {
         getDogs()
@@ -39,6 +40,15 @@ export default function Catalogue({navigation, route}) {
         setDogs(resultFilter)
     }
 
+    function handleDogsId() {
+        setDogsId([])
+        for (let index = 0; index < dogs.length; index++) {
+            var idApi = dogs[index].idApi
+            dogsId.push(idApi)
+        }
+        console.log("dogsId = " + dogsId)
+    }
+
     function deleteDog(id) {
         console.log("Removido id: " + id)
         dogRemove(id)
@@ -59,7 +69,6 @@ export default function Catalogue({navigation, route}) {
             <View style={styles.features}>
                 <SearchBar 
                     containerStyle={styles.containerInputSearchFeature}
-                    inputContainerStyle={styles.inputSearchFeature}
                     lightTheme={true}
                     round={true}
                     placeholder="Search for breed..."
@@ -67,9 +76,17 @@ export default function Catalogue({navigation, route}) {
                     value={search}
                     onClear={getDogs}
                 />
-                <Icon style={styles.iconFeatures} name="reload1" size={25} color={'#000'} onPress={() => getDogs()}/>
+                <TouchableOpacity onPress={() => getDogs()}>
+                    <Icon style={styles.iconFeatures} name="reload1" size={25} color={'#000'}/>
+                </TouchableOpacity>
                 { route.params.level == 1 ?
-                    (<Icon style={styles.iconFeatures} name="plus" size={25} color={'#000'} onPress={() => navigation.navigate("FindScreen")}/>)
+                        <TouchableOpacity onPress={() => {
+                                handleDogsId()
+                                navigation.navigate("FindScreen", {dogsId: dogsId})
+                                }
+                            }>
+                            <Icon style={styles.iconFeatures} name="pluscircle" size={25} color={'#000'}/>
+                        </TouchableOpacity>
                     :
                     null
                 }
