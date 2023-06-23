@@ -1,7 +1,7 @@
 import db from "./SqLiteDatabase"
 
 const userSqlCreateTable = "CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, email TEXT, level INTEGER, password TEXT);"
-const dogSqlCreateTable = "CREATE TABLE IF NOT EXISTS dog (id INTEGER PRIMARY KEY AUTOINCREMENT, breed TEXT, origin TEXT, infoUrl TEXT, imgUrl TEXT);"
+const dogSqlCreateTable = "CREATE TABLE IF NOT EXISTS dog (id INTEGER PRIMARY KEY AUTOINCREMENT, breed TEXT, origin TEXT, infoUrl TEXT, imgUrl TEXT, idApi INTEGER);"
 const userSqlCreate = "INSERT INTO user (name, email, level, password) values (?, ?, ?, ?);"
 
 function dropTable(tableName) {

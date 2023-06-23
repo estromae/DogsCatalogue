@@ -1,7 +1,7 @@
 import db from "../SqLiteDatabase"
 
 const dogSqlList = "SELECT * FROM dog"
-const dogSqlCreate = "INSERT INTO dog (breed, origin, infoUrl, imgUrl) values (?, ?, ?, ?);"
+const dogSqlCreate = "INSERT INTO dog (breed, origin, infoUrl, imgUrl, idApi) values (?, ?, ?, ?, ?);"
 const dogSqlUpdate = "UPDATE dog SET breed=?, origin=?, infoUrl=?, imgUrl=? WHERE id = ?"
 const dogSqlRemove = "DELETE FROM dog WHERE id = ?"
 
@@ -61,7 +61,7 @@ async function dogCreate(dog) {
         try {
             db.transaction( tx => {
                 tx.executeSql(dogSqlCreate, 
-                    [dog.breed, dog.origin, dog.url, dog.img],
+                    [dog.breed, dog.origin, dog.url, dog.img, dog.id],
                     (transactionCurrent, resultSet) => {
                         resolve()
                     },
