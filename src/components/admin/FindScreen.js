@@ -63,39 +63,51 @@ export default function Find({route}) {
         Alert.alert("Notice", message)
     }
 
+    const renderListApi = (() => {
+        return (
+            <FlatList
+            data={dogsApi}
+            renderItem={({item}) => 
+                <View style={styles.itemsList}>
+                    <TouchableOpacity onPress={() => openUrl(item.url)}>
+                        <Image style={[styles.img, styles.item]} source={{ uri: item.img}}/>
+                    </TouchableOpacity>
+                    <Text style={[styles.item, styles.textItem]}>{item.breed}</Text>
+                    <Text style={[styles.item, styles.textItem]}>{item.origin}</Text>
+                    { dogsId.includes(item.id) ? 
+                        <Icon style={[styles.icon]} name="check" size={25} color={'#008000'}/>
+                        :
+                        <TouchableOpacity onPress={() => addDog(item)}>
+                            <Icon style={[styles.icon]} name="plus" size={25} color={'#000'}/>
+                        </TouchableOpacity>
+                    }
+                </View>
+            }
+        />
+        )
+    })
+
+    const renderSearchBar = ((onClear) => {
+        return (
+            <SearchBar 
+            containerStyle={styles.containerInputSearchFeature}
+            lightTheme={true}
+            round={true}
+            placeholder="Search for breed..."
+            onChangeText={filter}
+            value={search}
+            onClear={onClear}
+        />
+        )
+    })
+
     return (
         <View style={styles.container}>
             <View style={styles.features}>
-                <SearchBar 
-                    containerStyle={styles.containerInputSearchFeature}
-                    lightTheme={true}
-                    round={true}
-                    placeholder="Search for breed..."
-                    onChangeText={filter}
-                    value={search}
-                    onClear={getDogsFromApi}
-                />
+                {renderSearchBar(getDogsFromApi)}
             </View>
             <View style={{ height: '90%', width: '95%' }}>
-                <FlatList
-                    data={dogsApi}
-                    renderItem={({item}) => 
-                        <View style={styles.itemsList}>
-                            <TouchableOpacity onPress={() => openUrl(item.url)}>
-                                <Image style={[styles.img, styles.item]} source={{ uri: item.img}}/>
-                            </TouchableOpacity>
-                            <Text style={[styles.item, styles.textItem]}>{item.breed}</Text>
-                            <Text style={[styles.item, styles.textItem]}>{item.origin}</Text>
-                            { dogsId.includes(item.id) ? 
-                                <Icon style={[styles.icon]} name="check" size={25} color={'#008000'}/>
-                                :
-                                <TouchableOpacity onPress={() => addDog(item)}>
-                                    <Icon style={[styles.icon]} name="plus" size={25} color={'#000'}/>
-                                </TouchableOpacity>
-                            }
-                        </View>
-                    }
-                />
+                {renderListApi()}
             </View>  
         </View>
 

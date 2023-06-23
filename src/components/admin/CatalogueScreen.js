@@ -64,18 +64,46 @@ export default function Catalogue({navigation, route}) {
         }
     }
 
+    const renderListDb = (() => {
+        return (
+            <FlatList
+            data={dogs}
+            renderItem={({item}) => 
+                <View style={styles.itemsList}>
+                    <TouchableOpacity onPress={() => openUrl(item.infoUrl)}>
+                        <Image style={[styles.item, styles.img]} source={{ uri: item.imgUrl }}/>
+                    </TouchableOpacity>
+                    <Text style={[styles.item, styles.textItem]}>{item.breed}</Text>
+                    <Text style={[styles.item, styles.textItem]}>{item.origin}</Text>
+                    { route.params.level == 1 ? 
+                        (<Icon style={[styles.icon]} name="delete" size={25} color={'red'} onPress={() => deleteDog(item.id)}/>)
+                        :
+                        (<Icon style={[styles.icon]} name="edit" size={25} color={'#000'} onPress={() => navigation.navigate("EditScreen", {item: item})}/>)
+                    }
+                </View>
+            }
+        />
+        )
+    })
+
+    const renderSearchBar = ((onClear) => {
+        return (
+            <SearchBar 
+            containerStyle={styles.containerInputSearchFeature}
+            lightTheme={true}
+            round={true}
+            placeholder="Search for breed..."
+            onChangeText={filter}
+            value={search}
+            onClear={onClear}
+        />
+        )
+    })
+
     return (
         <View style={styles.container}>
             <View style={styles.features}>
-                <SearchBar 
-                    containerStyle={styles.containerInputSearchFeature}
-                    lightTheme={true}
-                    round={true}
-                    placeholder="Search for breed..."
-                    onChangeText={filter}
-                    value={search}
-                    onClear={getDogs}
-                />
+                {renderSearchBar(getDogs)}
                 <TouchableOpacity onPress={() => getDogs()}>
                     <Icon style={styles.iconFeatures} name="reload1" size={25} color={'#000'}/>
                 </TouchableOpacity>
@@ -92,23 +120,7 @@ export default function Catalogue({navigation, route}) {
                 }
             </View>
             <View style={{ height: '90%', width: '95%' }}>
-                <FlatList
-                    data={dogs}
-                    renderItem={({item}) => 
-                        <View style={styles.itemsList}>
-                            <TouchableOpacity onPress={() => openUrl(item.infoUrl)}>
-                                <Image style={[styles.item, styles.img]} source={{ uri: item.imgUrl }}/>
-                            </TouchableOpacity>
-                            <Text style={[styles.item, styles.textItem]}>{item.breed}</Text>
-                            <Text style={[styles.item, styles.textItem]}>{item.origin}</Text>
-                            { route.params.level == 1 ? 
-                                (<Icon style={[styles.icon]} name="delete" size={25} color={'red'} onPress={() => deleteDog(item.id)}/>)
-                                :
-                                (<Icon style={[styles.icon]} name="edit" size={25} color={'#000'} onPress={() => navigation.navigate("EditScreen", {item: item})}/>)
-                            }
-                        </View>
-                    }
-                />
+                {renderListDb()}
             </View>  
         </View>
     )
