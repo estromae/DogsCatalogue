@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, TextInput, Alert, TouchableOpacity } from "react-native";
-// mudar esse tableDogCreate pra outra função
+
 import { userCreateTable, dogCreateTable, dropTable } from '../services/startDb'
 import { listUsers } from "../services/authentification/signIn";
 
 export default function Home({navigation}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [isEditable, setIsEditable] = useState(true)
 
     useEffect(() => {
         dropTable("user")
         // dropTable("dog")
         userCreateTable()
         dogCreateTable()
-        navigation.navigate('CatalogueScreen', {level: 1})
+        // navigation.navigate('CatalogueScreen', {level: 1})
     }, [])
 
     function handleInputs(email, password) {
@@ -81,7 +80,7 @@ export default function Home({navigation}) {
                     onChangeText={setPassword}
                     placeholder="Password..."
                     autoCapitalize="none"
-                    secureTextEntry={isEditable}
+                    secureTextEntry={true}
                 />
                 <TouchableOpacity style={styles.button} onPress={() => handleInputs(email, password)}>
                     <Text style={styles.textButton}>Login</Text>
