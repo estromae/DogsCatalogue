@@ -27,7 +27,6 @@ export default function Home({navigation}) {
     async function getUsers(){
         let users = [] 
         users = await listUsers()
-        console.log(users)
         autenEmailUser(users)
     }
 
@@ -55,8 +54,6 @@ export default function Home({navigation}) {
     }
 
     function goToScreen(user) {
-        console.log("nivel usuário " + user.level)
-        console.log("tipo " + typeof user.level)
         navigation.navigate('CatalogueScreen', {level: user.level})
 
     }
